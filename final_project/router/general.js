@@ -108,5 +108,52 @@ public_users.get('/review/:isbn',function (req, res) {
     }
  });
 
+ //Task 10 - Get book list using async/await with Axios
+ const axios = require('axios');
+
+ const getBooksPromise = async () => {
+    try {
+        const response = await axios.get('https://hcover333-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/');
+        console.log(response.data);
+    
+    }  catch(error) {
+        console.error("Error fetching books: ", error.message);
+    }
+ };
+
+// getBooksPromise(); 
+
+const getBookByISBN = async (isbn) =>{
+    try {
+        const response = await axios.get(`https://hcover333-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/isbn/${isbn}`);
+        console.log("Book Details: ", response.data);
+    } catch (error) {
+        console.error("Error fetching book details by ISBN: ", error.message);
+    }
+};
+
+// getBookByISBN("1");
+
+const getBookByAuthor = async (author) => {
+    try {
+        const response = await axios.get(`https://hcover333-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/author/${author}`)
+        console.log("Book details: ", response.data);
+    } catch (error) {
+        console.error("Error fetching book details by author: ", error.message);
+    }
+}
+
+// getBookByAuthor("Jane Austen");
+
+const getBooksByTitle = async (title) => {
+    try {
+        const response = await axios.get(`https://hcover333-5000.theianext-0-labs-prod-misc-tools-us-east-0.proxy.cognitiveclass.ai/title/${title}`)
+        console.log("Book details: ", response.data);
+    } catch (error) {
+        console.error("Error fetching book details by title ", error.message);
+    }
+}
+
+// getBooksByTitle("Things fall apart");
 
 module.exports.general = public_users;
